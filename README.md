@@ -11,4 +11,4 @@ Use apache `ab` to do load testing. Command: `ab -n 1000 -c <concurrency> -r htt
 
 ## Blocking Server With Single Thread
 **Blocing Server With Single Thread:** (request) => LOOP[(accpet connection) => (read request) => (handle request) => (response) => (close connection)], this routine is done in a single thread.<br>
-**Name:** blocking_server_v1
+**Name:** <font color='red'><b>blocking_server_v1</b></font><br>
