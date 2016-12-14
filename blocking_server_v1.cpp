@@ -33,6 +33,7 @@ int main(int argc, char **argv) {
     for (;;) {
         int conn = w_accept(socket_server, 0, 0);
         w_read(conn, request_buffer, REQUEST_BUFSIZ);
+        handle_request();
         server_response(conn);
         w_close(conn);
     }
