@@ -3,7 +3,7 @@ Server Benchmarking
 
 ## Description
 This project aims to do server benchmarking for different kind of server implementations.<br>
-Use apache `ab` to do load testing. Command: `ab -n 1000 -c <concurrency> -r http://server-ip:9876/`. And benchmarking result is showed with charts. For all kind of servers, `handle_request()` will `sleep` the working thread for 30 - 50 milliseconds to simulate a business server. And all server runs on `AWS EC2 Linux 3.14.35-28.38.amzn1.x86_64`, and set `net.core.somaxconn=1024`, and `listen(fd, backlog=1000)`. My NIC speed is `10000Mb/s`, `2.4GHz` CPU, `15G` RAM.
+Use apache `ab` to do load testing. Command: `ab -n 1000 -c <concurrency> -r http://server-ip:9876/`. And benchmarking result is showed with charts. For all kind of servers, `handle_request()` will `sleep` the working thread for 30 - 50 milliseconds to simulate a business server. And all server runs on `AWS EC2 Linux 3.14.35-28.38.amzn1.x86_64`, and set `net.core.somaxconn=1024`, and `listen(fd, backlog=1000)`. My NIC speed is `10000Mb/s`, `2.4GHz` CPU, `15G` RAM, `4` CPUs and `2` threads per core.
 
 ## Benchmarking Parameters
  - **millisecond per request:** time cost on every http request.
