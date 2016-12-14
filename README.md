@@ -18,9 +18,9 @@ Use apache `ab` to do load testing. Command: `ab -n 1000 -c <concurrency> -r htt
 **To Be Continued ...**
 
 ## Benchmarking Charts
- - `x-axis` means concurrency.
-<img src="https://github.com/linghuazaii/server-benchmark/blob/master/benchmarking/blocking_server_v1_time_per_request.png"><br>
-<img src="https://github.com/linghuazaii/server-benchmark/blob/master/benchmarking/blocking_server_v1_request_per_second.png"><br>
+ - `x-axis` means concurrency.<br><br>
+<img src="https://github.com/linghuazaii/server-benchmark/blob/master/benchmarking/blocking_server_v1_time_per_request.png"></img><br>
+<img src="https://github.com/linghuazaii/server-benchmark/blob/master/benchmarking/blocking_server_v1_request_per_second.png"></img><br>
 
 ## The End
 Any suggestions, please add a `pull request` or send mail to [charlesliu.cn.bj@gmail.com](charlesliu.cn.bj@gmail.com) or [charlesliu.cn.bj@qq.com](charlesliu.cn.bj@qq.com).
