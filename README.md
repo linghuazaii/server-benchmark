@@ -8,6 +8,7 @@ Use apache `ab` to do load testing. Command: `ab -n 1000 -c <concurrency> -r htt
 ## Benchmarking Parameters
  - **millisecond per request:** time cost on every http request.
  - **request per second:** http requests handled per second.
+ - **concurrency step:** `1 10 20 40 60 80 100 200 400 600 800 1000`
 
 ## Blocking Server With Single Thread
 **Blocing Server With Single Thread:** (request) => LOOP[(accpet connection) => (read request) => (handle request) => (response) => (close connection)], this routine is done in a single thread.<br>
