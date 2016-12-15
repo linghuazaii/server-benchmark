@@ -14,6 +14,10 @@ Use apache `ab` to do load testing. Command: `ab -n 1000 -c <concurrency> -r htt
 **Blocing Server With Single Thread:** (request) => LOOP[(accpet connection) => (read request) => (handle request) => (response) => (close connection)], this routine is done in a single thread.<br>
 **Name:** [blocking_server_v1](#)
 
+## Blocking Server V2
+**Blocking Server V2:** `fork` a child to handle every incoming request, it's best performance seems to be **450 QPS, 600 concurrency**.<br>
+**Name:** [blocking_server_v2](#)
+
 ## More Server Implements To Add
 **To Be Continued ...**
 
