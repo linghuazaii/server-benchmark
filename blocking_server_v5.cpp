@@ -33,7 +33,7 @@ int main(int argc, char **argv) {
     sigchld_action.sa_flags = SA_NOCLDWAIT;
     sigaction(SIGCHLD, &sigchld_action, NULL);
 
-    /* fork 15 children */
+    /* fork 3 children */
     for (int i = 0; i < 3; ++i) {
         int child = fork();
         if (child == 0) {
