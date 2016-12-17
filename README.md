@@ -34,6 +34,26 @@ Use apache `ab` to do load testing. Command: `ab -n 1000 -c <concurrency> -r htt
 **Blocking Server V6:** `2` processes. It seems to be that it is dumb to have multiple processes `accept` on the same listening socket. The best choice for these 6 server implements is `Blocking Server V2`. I have thought about the root cause, I think it is because of too much context switch for servers implemented with multiple processes `accept` on the same listening socket. But I don't know how to verify this.<br>
 **Name:** [blocking_server_v6](#)
 
+## Blocking Server V7
+**Blocking Server V7:** create a thread for every incoming request.<br>
+**Name:** [blocking_server_v7](#)
+
+## Blocking Server V8
+**Blocking Server V8:** 16 threads, too bad!<br>
+**Name:** [blocking_server_v8](#)
+
+## Blocking Server V9
+**Blocking Server V9:** 8 threads, too bad!<br>
+**Name:** [blocking_server_v9](#)
+
+## Blocking Server V10
+**Blocking Server V10:** 4 threads, too bad!<br>
+**Name:** [blocking_server_v10](#)
+
+## Blocking Server V11
+**Blocking Server V11:** 2 threads, too bad!<br>
+**Name:** [blocking_server_v11](#)
+
 ## More Server Implements To Add
 **To Be Continued ...**
 
