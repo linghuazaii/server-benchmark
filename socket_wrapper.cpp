@@ -80,7 +80,7 @@ int w_read(int fildes, void *buf, size_t nbyte) {
         if (rc == -1 && errno == EINTR)
             continue;
         else if (rc == -1) {
-            SYSLOG("read() (%s)", strerror(errno));
+            SYSLOG("read(%d) (%s)", fildes, strerror(errno));
             break;
         } else
             break;
@@ -96,7 +96,7 @@ int w_write(int fildes, const void *buf, size_t nbyte) {
         if (rc == -1 && errno == EINTR)
             continue;
         else if (rc == -1) {
-            SYSLOG("write() (%s)", strerror(errno));
+            SYSLOG("write(%d) (%s)", fildes, strerror(errno));
             break;
         } else
             break;
@@ -112,7 +112,7 @@ int w_close(int fildes) {
         if (rc == -1 && errno == EINTR)
             continue;
         else if (rc == -1) {
-            SYSLOG("close() (%s)", strerror(errno));
+            SYSLOG("close(%d) (%s)", fildes, strerror(errno));
             break;
         } else
             break;
@@ -127,4 +127,18 @@ int w_setsockopt(int sockfd, int level, int optname, const void *optval, socklen
         SYSLOG("setsockopt() (%s)", strerror(errno));
 
     return rc;
+}
+
+int w_select(int nfds, fd_set *readfds, fd_set *writefds, fd_set *exceptfds, struct timeval *timeout) {
+    int rc = 0;
+    do {
+        rc = select(nfds, readfds, writefds, exceptfds, timeout);
+        if (rc == -1 && errno == EINTR)
+            continue;
+        else if (rc == -1) {
+            SYSLOG("select() (%s)", strerror(errno));
+            break;
+        } else
+            break;
+    } while (true);
 }

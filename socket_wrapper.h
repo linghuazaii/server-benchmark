@@ -5,6 +5,7 @@
 #include <sys/types.h>
 #include <arpa/inet.h>
 #include <netinet/in.h>
+#include <sys/select.h>
 /*
  * File: socket_wrapper.h
  * Description: system socket call wrappers
@@ -22,5 +23,6 @@ int w_read(int fildes, void *buf, size_t nbyte);
 int w_write(int fildes, const void *buf, size_t nbyte);
 int w_close(int fildes);
 int w_setsockopt(int sockfd, int level, int optname, const void *optval, socklen_t optlen);
+int w_select(int nfds, fd_set *readfds, fd_set *writefds, fd_set *exceptfds, struct timeval *timeout);
 
 #endif
