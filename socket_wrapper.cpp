@@ -160,3 +160,35 @@ int w_poll(struct pollfd *fds, nfds_t nfds, int timeout) {
 
     return rc;
 }
+
+int w_epoll_create(int size) {
+    int rc = epoll_create(1);
+    if (rc == -1)
+        SYSLOG("epoll_create() (%s)", strerror(errno));
+
+    return rc;
+}
+
+int w_epoll_ctl(int epfd, int op, int fd, struct epoll_event *event) {
+    int rc = epoll_ctl(epfd, op, fd, event);
+    if (rc == -1)
+        SYSLOG("epoll_ctl() (%s)", strerror(errno));
+
+    return rc;
+}
+
+int w_epoll_wait(int epfd, struct epoll_event *events, int maxevents, int timeout) {
+    int rc = 0;
+    do {
+        rc = epoll_wait(epfd, events, maxevents, timeout);
+        if (rc == -1 && errno == EINTR)
+            continue;
+        else if (rc == -1) {
+            SYSLOG("epoll_wait() (%s)", strerror(errno));
+            break;
+        } else 
+            break;
+    } while (true);
+
+    return rc;
+}

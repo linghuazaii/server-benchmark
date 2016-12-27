@@ -2,9 +2,7 @@
 #include "common.h"
 #include <signal.h>
 #include <pthread.h>
-#include "threadpool.h"
-#include <iostream>
-#include <queue>
+#include <sys/epoll.h>
 using namespace std;
 /*
  * fork() a new process to handle request
@@ -44,33 +42,8 @@ int main(int argc, char **argv) {
 
     int thread_num = atoi(argv[1]);
     threadpool_t *thread_pool = threadpool_create(thread_num, MAX_QUEUE, 0);
-    struct pollfd fds[MAXCONN];
-    queue<pollfd *> free_fds;
-    for (int i = 1; i < MAXCONN; ++i) {
-        fds[i].fd = -1;
-        free_fds.push(&fds[i]);
-    }
-    fds[0].fd = socket_server;
-    fds[0].events = POLLIN | POLLPRI;
+    int epollfd = w_epoll_create(0);
     for (;;) {
-        int count = w_poll(fds, MAXCONN, -1);
-        for (int i = 0; i < MAXCONN; ++i) {
-            if (fds[i].revents == POLLIN) {
-                if (fds[i].fd == socket_server) {
-                    int conn = w_accept(socket_server, 0, 0);
-                    pollfd *one = free_fds.front();
-                    free_fds.pop();
-                    one->fd = conn;
-                    one->events = POLLIN | POLLPRI;
-                } else {
-                    thread_data_t *data = new thread_data_t;
-                    data->conn = fds[i].fd;
-                    fds[i].fd = -1;
-                    free_fds.push(&fds[i]);
-                    threadpool_add(thread_pool, thread_routine, data, 0);
-                }
-            }
-        }
     }
 
     threadpool_destroy(thread_pool, threadpool_graceful);
