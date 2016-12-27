@@ -141,4 +141,22 @@ int w_select(int nfds, fd_set *readfds, fd_set *writefds, fd_set *exceptfds, str
         } else
             break;
     } while (true);
+
+    return rc;
+}
+
+int w_poll(struct pollfd *fds, nfds_t nfds, int timeout) {
+    int rc = 0;
+    do {
+        rc = poll(fds, nfds, timeout);
+        if (rc == -1 && errno == EINTR)
+            continue;
+        else if (rc == -1) {
+            SYSLOG("poll() (%s)", strerror(errno));
+            break;
+        } else
+            break;
+    } while (true);
+
+    return rc;
 }
