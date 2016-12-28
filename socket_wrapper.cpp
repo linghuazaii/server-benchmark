@@ -80,7 +80,7 @@ int w_read(int fildes, void *buf, size_t nbyte) {
         if (rc == -1 && errno == EINTR)
             continue;
         else if (rc == -1) {
-            SYSLOG("read(%d) (%s)", fildes, strerror(errno));
+            //SYSLOG("read(%d) (%s)", fildes, strerror(errno));
             break;
         } else
             break;
