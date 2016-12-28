@@ -54,8 +54,17 @@ Use apache `ab` to do load testing. Command: `ab -n 1000 -c <concurrency> -r htt
 **Blocking Server V11:** 2 threads, too bad!<br>
 **Name:** [blocking_server_v11](#)
 
-## More Server Implements To Add
-**To Be Continued ...**
+## Select & threadpool version
+QPS can hit 3000, sometimes 6000+, sometimes lower, not stable.
+
+## Poll & threadpool version
+QPS can hit 3000, most time much slower, it is bad than select.
+
+## Epoll & threadpool version
+QPS can hit 3000+, stable. Best choice. And there are many architecture to implement. I will implement a high performance server, not only consider epoll but also memory allocation and socket options and use queue to cache message so as to not let my server hang in somewhere. It is always true that speed of the read side and write side is not the same and has much difference. 
+
+## Won't update benchmark charts
+It is very annoying to update these stupid charts. It costs too much time and I know the result. These charts is for you guys. ^_^ So, I will let you finish your work.
 
 ## Benchmarking Charts
  - `x-axis` means concurrency.
