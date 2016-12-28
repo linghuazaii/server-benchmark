@@ -62,7 +62,8 @@ int main(int argc, char **argv) {
         for (int i = 0; i < count; ++i) {
             if (events[i].events & EPOLLIN) {
                 if (events[i].data.fd == socket_server) {
-                    int conn = w_accept4(socket_server, 0, 0, SOCK_NONBLOCK);
+                    //int conn = w_accept4(socket_server, 0, 0, SOCK_NONBLOCK);
+                    int conn = w_accept(socket_server, 0, 0);
                     event.events = EPOLLIN/* | EPOLLET*/;
                     event.data.fd = conn;
                     w_epoll_ctl(epollfd, EPOLL_CTL_ADD, conn, &event);
