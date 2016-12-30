@@ -11,6 +11,8 @@ using namespace std;
  */
 
 #define MAXCONN 1000
+#define BENCH_SNDBUF 5 * 1024 * 1024
+#define BENCH_RCVBUF 5 * 1024 * 1024
 
 typedef struct thread_data_tag {
     char request_buffer[REQUEST_BUFSIZ];
@@ -43,6 +45,13 @@ int main(int argc, char **argv) {
     int wait_seconds = 60; /* 60s */
     /* good for http, should be tunned */
     //w_setsockopt(socket_server, IPPROTO_TCP, TCP_DEFER_ACCEPT, &wait_seconds, sizeof(int));
+
+    /* cost my network mostly
+     * SNDBUF/RCVBUF = rtt * network-speed(Mpbs) / 8
+     */
+    int sndbuf = BENCH_SNDBUF, rcvbuf = BENCH_RCVBUF;
+    w_setsockopt(socket_server, SOL_SOCKET, SO_SNDBUF, &sndbuf, sizeof(int));
+    w_setsockopt(socket_server, SOL_SOCKET, SO_RCVBUF, &rcvbuf, sizeof(int));
 
     reuse_address(socket_server);
     w_bind(socket_server, (struct sockaddr *)&server_addr, sizeof(server_addr));
